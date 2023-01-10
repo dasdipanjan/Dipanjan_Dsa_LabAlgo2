@@ -28,9 +28,9 @@ public class CurrencyDenominations {
 	/**
 	 * This method is responsible to arrange input denomination in descending order.
 	 * 
-	 * @param arr
-	 * @param left
-	 * @param right
+	 * @param arr   actual array provided by user input.
+	 * @param left  Extreme left index of the array.
+	 * @param right Extreme right index of the array.
 	 */
 	private void mergeSort(int arr[], int left, int right) {
 		if (left < right) {
@@ -44,10 +44,10 @@ public class CurrencyDenominations {
 	/**
 	 * This method is responsible to combine all sorted array in sorted sub arrays.
 	 * 
-	 * @param array
-	 * @param left
-	 * @param mid
-	 * @param right
+	 * @param array sub array.
+	 * @param left  left index of array
+	 * @param mid   middle index of array
+	 * @param right right index of array
 	 */
 	public void merge(int array[], int left, int mid, int right) {
 		int leftArrLength = mid - left + 1;
@@ -68,6 +68,7 @@ public class CurrencyDenominations {
 		j = 0;
 		k = left;
 
+		// Comparing array element in arranging them in descending order.
 		while (i < leftArrLength && j < rightArrLength) {
 			if (leftArray[i] >= rightArray[j]) {
 				array[k] = leftArray[i];
@@ -79,12 +80,16 @@ public class CurrencyDenominations {
 			k++;
 		}
 
+		// Copying already sorted residual elements from left array to actual array if
+		// they are not already copied.
 		while (i < leftArrLength) {
 			array[k] = leftArray[i];
 			i++;
 			k++;
 		}
 
+		// Copying already sorted residual elements from right array to actual array if
+		// they are not already copied.
 		while (j < rightArrLength) {
 			array[k] = rightArray[j];
 			j++;
@@ -95,9 +100,9 @@ public class CurrencyDenominations {
 	/**
 	 * This method is responsible to find number of notes.
 	 * 
-	 * @param amount
-	 * @param denomination
-	 * @return
+	 * @param amount       amount provide by user to do the payment..
+	 * @param denomination note's value.
+	 * @return number of notes for a particular denomination.
 	 */
 	private int denomination(int amount, int denomination) {
 		try {
@@ -111,7 +116,7 @@ public class CurrencyDenominations {
 	 * This method is responsible to make count of different notes to pay given
 	 * amount.
 	 * 
-	 * @param amount
+	 * @param amount amount provide by user to do the payment.
 	 */
 	public void determineDenomination(int amount) {
 		mergeSort(notes, 0, (notes.length - 1));
@@ -135,12 +140,24 @@ public class CurrencyDenominations {
 		mStringBuffer.setLength(0);
 	}
 
+	/**
+	 * This method is responsible to keep already calculated pair of denomination
+	 * and their count.
+	 * 
+	 * @param pair String value.
+	 */
 	private void addPair(String pair) {
 		mStringBuffer.append(pair);
 		mStringBuffer.append("\n");
 	}
-
-	public void addElement(int index, int value) {
-		notes[index] = value;
+	
+	/**
+	 * This method is responsible to add element in a particular index in notes array.
+	 * 
+	 * @param index Index inside notes array.
+	 * @param denomination Denomination value.
+	 */
+	public void addElement(int index, int denomination) {
+		notes[index] = denomination;
 	}
 }
